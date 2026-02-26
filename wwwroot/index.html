@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InnovateEd Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <h2>InnovateEd Hub</h2>
+        <div class="nav-item">Dashboard</div>
+        <div class="nav-item active">Students & Grades</div>
+    </nav>
+
+    <main>
+        <div class="header-banner">
+            <h1>Student Management System</h1>
+            <p>Register students and manage their academic performance.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <section>
+                <div class="card">
+                    <h3>Register Student</h3>
+                    <input type="text" id="regName" placeholder="Full Name">
+                    <input type="email" id="regEmail" placeholder="Email Address">
+                    <button onclick="uiAddStudent()" style="width:100%">Register</button>
+                </div>
+
+                <div class="card">
+                    <h3>Select Student</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>GPA</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <div id="gradePanel" class="card" style="display:none; border-top: 5px solid #f3a952;">
+                    <h3 id="panelTitle">Grading</h3>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label>Select Course</label>
+                        <select id="courseName" style="width: 100%; padding: 8px;">
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Science">Science</option>
+                            <option value="History">History</option>
+                            <option value="Computer Science">Computer Science</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label>Score (0-100)</label>
+                        <input type="number" id="courseScore" placeholder="85">
+                    </div>
+
+                    <input type="hidden" id="activeStudentId">
+                    <button onclick="uiSubmitGrade()" style="width:100%; background:#2c3e50">Assign Grade</button>
+                    
+                    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="margin:0;">Grade History</h4>
+                        <button onclick="document.getElementById('gradePanel').style.display='none'" 
+                                style="background: #95a5a6; padding: 5px 10px; font-size: 0.7rem;">Close</button>
+                    </div>
+
+                    <ul id="historyList" style="margin-top: 15px; padding-left: 0; list-style: none;"></ul>
+
+                    <div style="margin-top: 30px; padding-top: 15px; border-top: 2px dashed #eee;">
+                        <button onclick="uiDeleteStudent()" 
+                                style="background: #e74c3c; width: 100%; font-size: 0.8rem;">
+                                Delete This Student Permanently
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

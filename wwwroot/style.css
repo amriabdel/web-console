@@ -1,0 +1,88 @@
+:root {
+    --primary: #f3a952; /* The orange from the 'Add Student' button */
+    --bg-gradient: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);
+    --sidebar-bg: rgba(44, 62, 80, 0.8);
+    --card-bg: rgba(255, 255, 255, 0.9);
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-gradient);
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar Navigation */
+nav {
+    width: 240px;
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+nav h2 { font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+
+/* Main Content Area */
+main {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.header-banner {
+    background: linear-gradient(to right, #2c3e50, #4ca1af);
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Form and Cards */
+.card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+/* The Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th { text-align: left; color: #666; padding: 10px; border-bottom: 2px solid #eee; }
+td { padding: 15px 10px; border-bottom: 1px solid #eee; }
+
+.btn-delete { background: #e74c3c; padding: 5px 10px; font-size: 0.8rem; }
+.btn-edit { background: #3498db; padding: 5px 10px; font-size: 0.8rem; margin-right: 5px; }

@@ -17,34 +17,37 @@ namespace StudentAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<object>>> GetStudents()
         {
-            return await _context.Students.ToListAsync();
+            // We use Select to calculate the AverageScore on the fly for the UI
+            var students = await _context.Students.Include(s => s.Grades).ToListAsync();
+            return Ok(students.Select(s => new {
+                s.Id,
+                s.Name,
+                s.Email,
+                Grades = s.Grades,
+                AverageScore = s.Grades.Any() ? s.Grades.Average(g => g.Score) : 0
+            }));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddStudent(string name)
+        public async Task<IActionResult> AddStudent([FromBody] Student student)
         {
-            var student = new Student { Name = name };
             _context.Students.Add(student);
-            
-            // SaveChangesAsync() is the async version of SaveChanges()
             await _context.SaveChangesAsync();
-            
             return Ok(student);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateStudent(int id, string name)
+        [HttpPost("{studentId}/grades")]
+        public async Task<IActionResult> AddGrade(int studentId, [FromBody] Grade grade)
         {
-            // Use FindAsync() for primary key lookups
-            var student = await _context.Students.FindAsync(id);
+            var student = await _context.Students.FindAsync(studentId);
             if (student == null) return NotFound();
 
-            student.Name = name;
+            grade.StudentId = studentId;
+            _context.Grades.Add(grade);
             await _context.SaveChangesAsync();
-            
-            return Ok(student);
+            return Ok(grade);
         }
 
         [HttpDelete("{id}")]
@@ -52,11 +55,25 @@ namespace StudentAPI.Controllers
         {
             var student = await _context.Students.FindAsync(id);
             if (student == null) return NotFound();
-
             _context.Students.Remove(student);
             await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("grades/{gradeId}")]
+        public async Task<IActionResult> DeleteGrade(int gradeId)
+        {
+            var grade = await _context.Grades.FindAsync(gradeId);
             
-            return NoContent(); 
+            if (grade == null)
+            {
+                return NotFound("Grade not found.");
+            }
+
+            _context.Grades.Remove(grade);
+            await _context.SaveChangesAsync();
+            
+            return NoContent();
         }
     }
 }

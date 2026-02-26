@@ -4,10 +4,11 @@ namespace StudentAPI.Models
 {
     public class Student
     {
-        public int Id { get; set; } 
-
-        [Required(ErrorMessage = "Name is mandatory")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 50 characters")]
+        public int Id { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
+        
+        // A student can have a list of grades
+        public List<Grade> Grades { get; set; } = new List<Grade>();
     }
 }

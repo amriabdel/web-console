@@ -21,6 +21,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(); 
 }
 
+app.UseDefaultFiles(); // Looks for index.html
+app.UseStaticFiles();  // Allows serving HTML/CSS/JS
+
 app.MapControllers();
 
 app.Run();
