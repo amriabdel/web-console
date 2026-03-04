@@ -1,14 +1,14 @@
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace StudentAPI.Models
 {
     public class Student
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        
-        // A student can have a list of grades
-        public List<Grade> Grades { get; set; } = new List<Grade>();
+
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+
+        public List<Grade> Grades { get; set; } = new();
     }
 }

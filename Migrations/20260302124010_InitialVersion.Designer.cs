@@ -10,8 +10,8 @@ using StudentAPI.Data;
 namespace web_console.Migrations
 {
     [DbContext(typeof(StudentContext))]
-    [Migration("20260226124601_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260302124010_InitialVersion")]
+    partial class InitialVersion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,11 +63,13 @@ namespace web_console.Migrations
 
             modelBuilder.Entity("StudentAPI.Models.Grade", b =>
                 {
-                    b.HasOne("StudentAPI.Models.Student", null)
+                    b.HasOne("StudentAPI.Models.Student", "Student")
                         .WithMany("Grades")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("StudentAPI.Models.Student", b =>

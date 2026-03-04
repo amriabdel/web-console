@@ -5,9 +5,12 @@ namespace StudentAPI.Data
 {
     public class StudentContext : DbContext
     {
-        public StudentContext(DbContextOptions<StudentContext> options) : base(options) { }
+        public StudentContext(DbContextOptions<StudentContext> options)
+            : base(options)
+        {
+        }
 
         public DbSet<Student> Students { get; set; }
-        public DbSet<Grade> Grades { get; set; } // Add this line
+        public DbSet<Grade> Grades { get; set; }
     }
 }

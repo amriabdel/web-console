@@ -60,11 +60,13 @@ namespace web_console.Migrations
 
             modelBuilder.Entity("StudentAPI.Models.Grade", b =>
                 {
-                    b.HasOne("StudentAPI.Models.Student", null)
+                    b.HasOne("StudentAPI.Models.Student", "Student")
                         .WithMany("Grades")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("StudentAPI.Models.Student", b =>
